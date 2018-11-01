@@ -19,3 +19,5 @@ If you are in my section and have any questions or suggestions, please email me 
 #### [Week 5](https://docs.google.com/presentation/d/1XIsIdUkrEaJj4bHBYLV9MqOFA6sh5nSCdAmwo1ib9Zo/edit?usp=sharing)
 
 #### [Week 6](https://docs.google.com/presentation/d/1ooGoLy972TgEXgEkMiIBCzf2bAOEitd0G-vupU2dZik/edit?usp=sharing)
+
+#### [Week 7](https://docs.google.com/presentation/d/1HKDJ3EGRBQdduSRyAcmOOq_6Rn305wqcfMoslmf5dLU/edit#slide=id.g3394c80903_0_476)
