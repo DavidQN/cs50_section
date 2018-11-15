@@ -1,0 +1,99 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My async example 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <form action="/">
+      <input type="text" name="username" placeholder="Username" />
+      <input type="text" name="password" placeholder="Password" />
+      <input type="submit" />
+    </form>
+    <ul id="userlist"></ul>
+  </body>
+  <script>
+    // Grab the form and fire off this function when submit button is clicked
+    document.querySelector("form").onsubmit = function(e) {
+      // Prevent page from reloading on submit
+      e.preventDefault();
+
+      // Create form structure to populate and send to API
+      let formData = new FormData();
+
+      // Grab content from form
+      let username = document.querySelector("input[name=username]").value;
+      let password = document.querySelector("input[name=password]").value;
+
+      // Populate form
+      formData.append("username", username);
+      formData.append("password", password);
+
+      // Fetch is an improvement to the XMLHttpRequest api in HTML5, it uses something
+      // called "promises". What this does is it allows us to chain function calls together
+      // to make asynchronous calls.
+
+      // Think of it like when you are promising someone you will do something, and the next
+      // person says, “if you promise that, then I will promise this!”. Essentially a chain of your friends
+      // making promises with each promise dependent on the previous friends promise. So if one of your
+      // friends breaks their promise, the promises made after him can’t work right? Yep!
+      // So this is high level more or less how promises work in JavaScript. The “.then()” is used when a
+      // new promise is made based on the previous promise or function. So here we have “fetch()” which makes
+      // a POST request (essentially sending information to our backend flask) with some form data. The fetch has the
+      // possibility to be chained with a promise.
+      // Our first promise after fetch(), takes in some argument called “response”.
+
+      // Hmmmm, where is that argument coming from? Well, since it is chained with the “fetch()” function,
+      // it will return essentially whatever fetch returns. More or less this is true. What is really happening
+      // is fetch is sent to some URL, in our case it is sent to “/api” route in our flask application.
+      // Our flask “/api” route does something with it (It just validates a user) and then sends back the
+      // appropriate response. When flask sends its information back to the client side,
+      // we have our promise “.then()” waiting for it.
+      // When fetch completes, it passes whatever was returned from our flask route and passes that
+      // to the argument in the “.then(function(response)”.
+
+      // WHEW! Well, after it receives this response from flask and we have this funky syntax “response.json()”,
+      // well the first promise after “fetch()” receives the a “Response stream” and to read it to completion
+      // we do the “.json()”, which in turn returns a promise.
+      // Our final promise!!! (Sort of!) We now received this new parsed JSON stream that is completely read,
+      // but we want to make it readable to our HTML document, so we use JSON.stringify, what that does is take
+      // some JSON looking object and turn it into a JSON string that our HTML document can understand and that is it!
+      // WAIT! What’s catch? Well catch is to catch any errors in your promise chain to tell if you where in your
+      // promise it may have failed, it’s not necessary, but it’s good for debugging purposes so recommended.
+
+      // Documentation: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+      // Async fetch POST request to API
+      fetch("/api", {
+        method: "POST",
+        body: formData
+      })
+        .then(function(response) {
+          // This right here is the response we will receive before we convert
+          // it over to readable JSON
+          console.log("Response turning to readable JSON", response);
+          return response.json();
+        })
+        .then(function(response) {
+          // Don't worry if this says "false", it just returns that when the user already exists from flasks end
+          // Once it reaches here, the async is already successful
+          console.log("Successful async: ", JSON.stringify(response));
+
+          // This part can be omited, but here we are just taking this response and adding a user onto a list
+          // when a user is validated. This is for visualization purposes
+          // Create LI
+          if (JSON.stringify(response) != "false") {
+            let li = document.createElement("li");
+            let userText = document.createTextNode(JSON.stringify(response));
+            li.appendChild(userText);
+
+            // Append LI to UL
+            document.querySelector("#userlist").appendChild(li);
+          }
+        })
+        .catch(function(error) {
+          console.log("Error in async", error);
+        });
+    };
+  </script>
+</html>

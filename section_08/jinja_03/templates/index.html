@@ -1,0 +1,30 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+</head>
+
+<body>
+    I am just a rendered template, nothing really special about me at the current moment
+
+    <div>
+        <!-- When an array is passed to Jinja2 we can't just display it like we previously did for the variable,
+        why? Because an array or more correctly a list in python is an series of elements. In our case
+        the array being passed in is an array of strings. If I want to display all the elements in this array
+        I would have to iterate over the array and display each element individually since each element individually
+        is in fact a string.
+            
+        How do I do this? By making use of Jinja2's for loop. Similar to a for loop in python just with 
+        a little pizazz
+        -->
+        {% for elem in data %}
+        <li>
+            {{ elem }}
+        </li>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

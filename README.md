@@ -21,3 +21,5 @@ If you are in my section and have any questions or suggestions, please email me 
 #### [Week 6](https://docs.google.com/presentation/d/1ooGoLy972TgEXgEkMiIBCzf2bAOEitd0G-vupU2dZik/edit?usp=sharing)
 
 #### [Week 7](https://docs.google.com/presentation/d/1HKDJ3EGRBQdduSRyAcmOOq_6Rn305wqcfMoslmf5dLU/edit#slide=id.g3394c80903_0_476)
+
+#### [Week 8](https://docs.google.com/presentation/d/10_oMPeDVeQuzJ7Mh9oL4WVzs5AVt9TlZziyc2Lk67Ys/edit?usp=sharing)
